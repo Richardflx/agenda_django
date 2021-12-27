@@ -3,17 +3,39 @@
 {% block content %}
     <h2>Agendamentos</h2>
     <a href="evento/">
-        <button type="button">Novo evento</button>
+        <button type="button" class="btn btn-primary">Novo Evento</button>
     </a>
-    <ul>
-        {% for evento in eventos %}
-            <li>{{ evento.titulo }} - {{ evento.get_data_evento }}</li>
-                {% if evento.descricao %}
-                    <p>{{ evento.descricao }}</p>
-                {% endif %}
-                {% if evento.local_evento %}
-                    <p><strong>Local:</strong> {{ evento.local_evento }}</p>
-                {% endif %}
-        {% endfor %}
-    </ul>
+    <div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Titulo</th>
+                <th scope="col">Data</th>
+                <th scope="col">Local</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for evento in eventos %}
+                <tr>
+                    <th scope="row">{{ evento.titulo }}</th>
+                    <td>{{ evento.get_data_evento }}</td>
+                    {% if not evento.local_evento %}
+                        <td>----------</td>
+                    {% else %}
+                        <td>{{ evento.local_evento }}</td>
+                    {% endif %}
+                    {% if not evento.descricao %}
+                        <td>----------</td>
+                    {% else %}
+                        <td>{{ evento.descricao }}</td>
+                    {% endif %}
+                    <td><a href="evento/?id={{ evento.id }}"><button type="button" class="btn btn-primary">Editar</button></a></td>
+                    <td><a href="evento/{{ evento.id }}/delete/"><button type="button" class="btn btn-danger">Deletar</button></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
 {% endblock %}
