@@ -2,9 +2,6 @@
 
 {% block content %}
     <h2>Agendamentos</h2>
-    <a href="evento/">
-        <button type="button" class="btn btn-primary">Novo Evento</button>
-    </a>
     <div>
         <table class="table">
             <thead>
@@ -31,8 +28,9 @@
                     {% else %}
                         <td>{{ evento.descricao }}</td>
                     {% endif %}
-                    <td><a href="evento/?id={{ evento.id }}"><button type="button" class="btn btn-primary">Editar</button></a></td>
-                    <td><a href="evento/{{ evento.id }}/delete/"><button type="button" class="btn btn-danger">Deletar</button></a></td>
+                    <td><a href="evento/?id={{ evento.id }}"><button type="button" class="btn btn-primary">Editar</button></a> | 
+                        <a href="evento/{{ evento.id }}/delete/"><button type="button" class="btn btn-danger">Excluir</button></a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
